@@ -3,7 +3,36 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="pool1" class="com.mprog.spring.database.pool.ConnectionPool"/>
-    <bean id="pool2" class="com.mprog.spring.database.pool.ConnectionPool"/>
+    <bean id="pool1" class="com.mprog.spring.database.pool.ConnectionPool">
+<!--        <constructor-arg index="0" type="java.lang.String" value="postgres"/>-->
+        <constructor-arg name="username" type="java.lang.String" value="postgres"/>
+<!--        <constructor-arg index="1" type="java.lang.Integer" value="10"/>-->
+        <constructor-arg name="poolSize" type="java.lang.Integer" value="10"/>
+<!--        <constructor-arg index="3" type="java.util.Map">-->
+<!--            <map>-->
+<!--                <entry key="url" value="postgresUrl"/>-->
+<!--                <entry key="password" value="123123"/>-->
+<!--            </map>-->
+<!--        </constructor-arg>-->
+        <constructor-arg name="properties" type="java.util.Map">
+            <map>
+                <entry key="url" value="postgresUrl"/>
+                <entry key="password" value="123123"/>
+            </map>
+        </constructor-arg>
+<!--        <constructor-arg index="2" type="java.util.List">-->
+<!--            <list>-->
+<!--                <value>&#45;&#45;arg1=value1</value>-->
+<!--                <value>&#45;&#45;arg2=value2</value>-->
+<!--            </list>-->
+<!--        </constructor-arg>-->
+        <constructor-arg name="args" type="java.util.List">
+            <list>
+                <value>--arg1=value1</value>
+                <value>--arg2=value2</value>
+            </list>
+        </constructor-arg>
+    </bean>
+<!--    <bean id="pool2" class="com.mprog.spring.database.pool.ConnectionPool"/>-->
 
 </beans>
