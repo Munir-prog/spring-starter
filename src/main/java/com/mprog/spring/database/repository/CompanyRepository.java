@@ -8,6 +8,7 @@ import com.mprog.spring.database.pool.ConnectionPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -16,18 +17,20 @@ import java.util.Optional;
 
 @Transaction
 @Auditing
+@Repository
 public class CompanyRepository implements CrudRepository<Integer, Company> {
 
-//    @Resource(name = "pool1")
-//    @Autowired
-//    @Qualifier("pool1")
-    private ConnectionPool pool1;
+    private final ConnectionPool pool1;
+    private final List<ConnectionPool> poolList;
+    private final Integer poolSize;
 
-    @Autowired
-    private List<ConnectionPool> poolList;
-
-    @Value("${db.pool.size}")
-    private Integer poolSize;
+    public CompanyRepository(ConnectionPool pool1,
+                             List<ConnectionPool> poolList,
+                             @Value("${db.pool.size}") Integer poolSize) {
+        this.pool1 = pool1;
+        this.poolList = poolList;
+        this.poolSize = poolSize;
+    }
 
     @PostConstruct
     private void init() {
@@ -45,17 +48,4 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
         System.out.println("delete entity");
     }
 
-//    public CompanyRepository(ConnectionPool connectionPool) {
-//        this.connectionPool = connectionPool;
-//    }
-//
-//    public static CompanyRepository of(ConnectionPool connectionPool) {
-//        return new CompanyRepository(connectionPool);
-//    }
-
-
-    @Autowired
-    public void setPool1(ConnectionPool pool1) {
-        this.pool1 = pool1;
-    }
 }
