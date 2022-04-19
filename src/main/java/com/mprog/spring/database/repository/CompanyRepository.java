@@ -17,7 +17,8 @@ import java.util.Optional;
 
 @Transaction
 @Auditing
-@Repository
+// commented while learning type filters in component-scan xml function
+//@Repository
 public class CompanyRepository implements CrudRepository<Integer, Company> {
 
     private final ConnectionPool pool1;
