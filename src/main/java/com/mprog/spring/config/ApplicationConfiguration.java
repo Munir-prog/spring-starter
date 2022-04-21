@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.context.annotation.ComponentScan.*;
 
+//@ImportResource("classpath:application.xml")
+@Import(WebConfiguration.class)
 @Configuration
 @PropertySource("classpath:application.properties")
 @ComponentScan(
