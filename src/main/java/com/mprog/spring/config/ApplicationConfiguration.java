@@ -7,24 +7,12 @@ import com.mprog.web.config.WebConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Component;
 
-import static org.springframework.context.annotation.ComponentScan.*;
 
-//@ImportResource("classpath:application.xml")
+//@ImportResource("classpath:applicationNoMoreNeed.xml")
 @Import(WebConfiguration.class)
 //@Configuration(proxyBeanMethods = false)
 @Configuration(proxyBeanMethods = true)
-@PropertySource("classpath:application.properties")
-@ComponentScan(
-        basePackages = "com.mprog.spring",
-        useDefaultFilters = false,
-        includeFilters = {
-                @Filter(type = FilterType.ANNOTATION, value = Component.class),
-                @Filter(type = FilterType.ASSIGNABLE_TYPE, value = CrudRepository.class),
-                @Filter(type = FilterType.REGEX, pattern = "com\\..+Repository"),
-        }
-)
 public class ApplicationConfiguration {
 
     @Bean("pool2")
