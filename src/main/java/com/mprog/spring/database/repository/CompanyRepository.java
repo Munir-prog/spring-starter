@@ -5,6 +5,7 @@ import com.mprog.spring.bpp.InjectBean;
 import com.mprog.spring.bpp.Transaction;
 import com.mprog.spring.database.entity.Company;
 import com.mprog.spring.database.pool.ConnectionPool;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,20 +19,14 @@ import java.util.Optional;
 @Transaction
 @Auditing
 // commented while learning type filters in component-scan xml function
-//@Repository
+@Repository
+@RequiredArgsConstructor
 public class CompanyRepository implements CrudRepository<Integer, Company> {
 
     private final ConnectionPool pool1;
     private final List<ConnectionPool> poolList;
+    @Value("${db.pool.size}")
     private final Integer poolSize;
-
-    public CompanyRepository(ConnectionPool pool1,
-                             List<ConnectionPool> poolList,
-                             @Value("${db.pool.size}") Integer poolSize) {
-        this.pool1 = pool1;
-        this.poolList = poolList;
-        this.poolSize = poolSize;
-    }
 
     @PostConstruct
     private void init() {
