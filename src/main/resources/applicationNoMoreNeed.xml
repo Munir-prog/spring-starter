@@ -7,11 +7,11 @@
 <!--                            http://www.springframework.org/schema/context-->
 <!--                            http://www.springframework.org/schema/context/spring-context-4.0.xsd">-->
 
-<!--    <context:property-placeholder location="classpath:application.properties"/>-->
+<!--    <context:property-placeholder location="classpath:applicationNoMoreNeed.propertiesBad"/>-->
 
 
     <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
-    <!--        <property name="location" value="application.properties"/>-->
+    <!--        <property name="location" value="applicationNoMoreNeed.propertiesBad"/>-->
     <!--    </bean>-->
 
 <!--    annotation-config is included into component-scan-->
