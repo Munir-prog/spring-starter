@@ -1,7 +1,6 @@
 package com.mprog.spring.config;
 
 import com.mprog.spring.database.pool.ConnectionPool;
-import com.mprog.spring.database.repository.CrudRepository;
 import com.mprog.spring.database.repository.UserRepository;
 import com.mprog.web.config.WebConfiguration;
 import org.springframework.beans.factory.annotation.Value;
