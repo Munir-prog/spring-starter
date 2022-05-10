@@ -25,20 +25,20 @@ public class ApplicationConfiguration {
     return new ConnectionPool("test-pool", 25);
     }
 
-    @Bean
+//    @Bean
 //    @Profile("!prod")
 //    @Profile("prod&web")
-    @Profile("prod|web")
-    public UserRepository userRepository2(ConnectionPool pool2) {
-        return new UserRepository(pool2);
-    }
-
-    @Bean
-    public UserRepository userRepository3() {
-//        var connectionPool1 = pool3();
-//        var connectionPool2 = pool3();
-//        var connectionPool3 = pool3();
-        return new UserRepository(pool3());
-    }
+//    @Profile("prod|web")
+//    public UserRepository userRepository2(ConnectionPool pool2) {
+//        return new UserRepository(pool2);
+//    }
+//
+//    @Bean
+//    public UserRepository userRepository3() {
+////        var connectionPool1 = pool3();
+////        var connectionPool2 = pool3();
+////        var connectionPool3 = pool3();
+//        return new UserRepository(pool3());
+//    }
 
 }
