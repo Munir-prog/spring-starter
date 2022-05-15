@@ -7,8 +7,12 @@ import com.mprog.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +22,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
-    
+
+
+    @Test
+    void checkPageable() {
+        var pageable = PageRequest.of(1, 2, Sort.by("id"));
+        var result = userRepository.findAllBy(pageable);
+        assertThat(result).hasSize(2);
+    }
+
+
+    @Test
+    void checkSort() {
+        var sortBy = Sort.sort(User.class);
+        var sort = sortBy.by(User::getFirstname)
+                .and(sortBy.by(User::getLastname));
+
+        var sortByNames = Sort.by("firstname").and(Sort.by("lastname"));
+
+        var users = userRepository.findTop3ByBirthDateBefore(LocalDate.now(), sort);
+        assertThat(users).hasSize(3);
+    }
+
+    @Test
+    void checkFirstTop() {
+        var topUser = userRepository.findTopByOrderByIdDesc();
+        assertThat(topUser).isPresent();
+        topUser.ifPresent(user -> assertThat(user.getId()).isEqualTo(5L));
+    }
+
+
     @Test
     void checkQueries() {
         var users = userRepository.findByAll("a", "ov");
