@@ -1,6 +1,7 @@
 package com.mprog.spring;
 
 import com.mprog.spring.config.ApplicationConfiguration;
+import com.mprog.spring.database.entity.Company;
 import com.mprog.spring.database.pool.ConnectionPool;
 import com.mprog.spring.database.repository.CompanyRepository;
 import com.mprog.spring.service.CompanyService;
@@ -19,6 +20,12 @@ public class ApplicationRunner {
     public static void main(String[] args) {
         var context = SpringApplication.run(ApplicationRunner.class, args);
         System.out.println();
+
+        Company company = Company.builder()
+                .id(2)
+                .name("dwad")
+                .locales(null)
+                .build();
     }
 }
 
