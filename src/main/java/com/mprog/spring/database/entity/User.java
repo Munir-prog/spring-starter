@@ -1,12 +1,17 @@
 package com.mprog.spring.database.entity;
 
 import lombok.*;
+import org.springframework.data.jpa.repository.EntityGraph;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedEntityGraph(
+        name = "User.company",
+        attributeNodes = @NamedAttributeNode("company")
+)
 @Data
 @ToString(exclude = "userChats")
 @EqualsAndHashCode(of = "username")
