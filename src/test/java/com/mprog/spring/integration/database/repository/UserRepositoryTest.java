@@ -4,6 +4,7 @@ import com.mprog.spring.database.entity.Role;
 import com.mprog.spring.database.entity.User;
 import com.mprog.spring.database.repository.UserRepository;
 import com.mprog.spring.dto.PersonalInfo;
+import com.mprog.spring.dto.UserFilter;
 import com.mprog.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
@@ -25,6 +26,17 @@ class UserRepositoryTest {
 
     private final UserRepository userRepository;
 
+    @Test
+    void checkCustomImplementation() {
+        UserFilter filter = new UserFilter(
+                null,
+                "%ov%",
+                LocalDate.now()
+        );
+        var allByFilter = userRepository.findAllByFilter(filter);
+        System.out.println();
+    }
+
 
     @Test
     void checkProjection() {
@@ -32,6 +44,8 @@ class UserRepositoryTest {
         assertThat(personalInfos).hasSize(2);
         System.out.println();
     }
+
+
     @Test
     void checkPageable() {
         var pageable = PageRequest.of(1, 2, Sort.by("id"));
