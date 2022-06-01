@@ -42,11 +42,12 @@ class UserRepositoryTest {
     void checkCustomImplementation() {
         UserFilter filter = new UserFilter(
                 null,
-                "%ov%",
+                "ov",
                 LocalDate.now()
         );
         var allByFilter = userRepository.findAllByFilter(filter);
         System.out.println();
+        assertThat(allByFilter).hasSize(4);
     }
 
 

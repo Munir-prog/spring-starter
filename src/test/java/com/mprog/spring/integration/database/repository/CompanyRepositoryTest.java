@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Commit
 class CompanyRepositoryTest {
 
-    private static final Integer APPLE_ID = 4;
+    private static final Integer APPLE_ID = 5;
     private final EntityManager entityManager;
     private final TransactionTemplate transactionTemplate;
     private final CompanyRepository companyRepository;
