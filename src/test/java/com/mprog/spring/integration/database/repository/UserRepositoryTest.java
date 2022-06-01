@@ -27,6 +27,12 @@ class UserRepositoryTest {
 
     private final UserRepository userRepository;
 
+    @Test
+    void checkJdbcTemplate() {
+        var users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
+        assertThat(users).hasSize(1);
+        assertThat(users.get(0).lastname()).isEqualTo("Petrov");
+    }
 
     @Test
     @Commit

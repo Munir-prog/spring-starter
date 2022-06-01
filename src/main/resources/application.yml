@@ -27,6 +27,7 @@ logging:
   level:
     root: INFO
     com.mprog.spring.database.pool: DEBUG
+    org.springframework.jdbc.core: TRACE
   file:
     name: mprog.log
     path: /
