@@ -2,10 +2,12 @@ package com.mprog.spring.integration.database.repository;
 
 import com.mprog.spring.database.entity.Company;
 import com.mprog.spring.database.repository.CompanyRepository;
+import com.mprog.spring.integration.IntegrationTestBase;
 import com.mprog.spring.integration.annotation.IT;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
@@ -21,12 +23,11 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@IT
 @RequiredArgsConstructor
 //@Transactional
 //@Rollback // by default
-@Commit
-class CompanyRepositoryTest {
+//@Commit
+class CompanyRepositoryTest extends IntegrationTestBase {
 
     private static final Integer APPLE_ID = 5;
     private final EntityManager entityManager;
@@ -39,7 +40,9 @@ class CompanyRepositoryTest {
         var google = companyRepository.findByName("Google");
         var companies = companyRepository.findAllByNameContainingIgnoreCase("a");
     }
+
     @Test
+    @Disabled
     void delete() {
         var maybeCompany = companyRepository.findById(APPLE_ID);
         assertTrue(maybeCompany.isPresent());
