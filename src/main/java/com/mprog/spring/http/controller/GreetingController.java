@@ -1,12 +1,10 @@
 package com.mprog.spring.http.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -16,10 +14,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class GreetingController {
 
 
-    @GetMapping("/hello")
+    @GetMapping("/hello/{id}")
     public ModelAndView hello(ModelAndView modelAndView,
-                              HttpServletRequest request
+                              HttpServletRequest request,
+                              @RequestParam("age") Integer age,
+                              @RequestHeader("accept") String accept,
+                              @CookieValue("JSESSIONID") String jSessionId,
+                              @PathVariable("id") Integer id
     ) {
+        var ageParamValue = request.getParameter("age");
+        var acceptHeader = request.getHeader("accept");
+        var cookies = request.getCookies();
         modelAndView.setViewName("greeting/hello");
         return modelAndView;
     }
