@@ -48,6 +48,8 @@ spring:
       hbm2ddl.auto: validate
     open-in-view: false
   mvc:
+    format:
+      date: iso
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
