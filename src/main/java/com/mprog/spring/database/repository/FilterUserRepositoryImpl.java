@@ -60,7 +60,7 @@ public class FilterUserRepositoryImpl implements FilterUserRepository {
                 .add(filter.firstname(), user.firstname::containsIgnoreCase)
                 .add(filter.lastname(), user.lastname::containsIgnoreCase)
                 .add(filter.birthDate(), user.birthDate::before)
-                .buildOr();
+                .build();
 
         return new JPAQuery<User>(entityManager)
                 .select(user)
