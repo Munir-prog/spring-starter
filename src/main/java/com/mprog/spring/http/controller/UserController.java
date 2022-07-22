@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -26,6 +27,13 @@ public class UserController {
         return "user/users";
     }
 
+    @GetMapping("/registration")
+    public String register(Model model, @ModelAttribute("user") UserCreateEditDto user) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("companies", companyService.findAll());
+        return "user/registration";
+    }
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model) {
@@ -41,11 +49,19 @@ public class UserController {
 
     @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
-    public String create(@ModelAttribute UserCreateEditDto user) {
+    public String create(@ModelAttribute UserCreateEditDto user, RedirectAttributes redirectAttributes) {
+//        if (userHasError(user)) {
+//            redirectAttributes.addFlashAttribute("user", user);
+//            return "redirect:/users/registration";
+//        }
         return "redirect:/users/" + userService.create(user).getId();
     }
 
-//    @PutMapping("/{id}")
+    private boolean userHasError(UserCreateEditDto user) {
+        return true;
+    }
+
+    //    @PutMapping("/{id}")
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id, @ModelAttribute UserCreateEditDto user) {
         return userService.update(id, user)
