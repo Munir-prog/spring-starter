@@ -10,6 +10,7 @@ import com.mprog.spring.service.UserService;
 import com.mprog.spring.validation.group.CreateAction;
 import com.mprog.spring.validation.group.UpdateAction;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.groups.Default;
 
+@Slf4j
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -30,6 +33,7 @@ public class UserController {
 
     private final UserService userService;
     private final CompanyService companyService;
+
 
     @GetMapping
     public String findAll(Model model, UserFilter filter, Pageable pageable) {
