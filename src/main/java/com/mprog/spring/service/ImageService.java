@@ -40,4 +40,12 @@ public class ImageService {
         }
     }
 
+    @SneakyThrows
+    public Optional<byte[]> get(String imagePath) {
+        var fullPath = Path.of(bucket, imagePath);
+        return Files.exists(fullPath)
+                ? Optional.of(Files.readAllBytes(fullPath))
+                : Optional.empty();
+    }
+
 }
