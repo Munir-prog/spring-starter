@@ -75,7 +75,9 @@ public class UserController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/users/registration";
         }
-        return "redirect:/users/" + userService.create(user).getId();
+
+        userService.create(user);
+        return "redirect:/login";
     }
 
     private boolean userHasError(UserCreateEditDto user) {
