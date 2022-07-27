@@ -17,7 +17,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatcher("/registration").
                 .authorizeRequests().anyRequest().authenticated()
 //                .and().httpBasic(Customizer.withDefaults());
-                .and().formLogin(login -> login
+                .and()
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .deleteCookies("JSESSIONID"))
+                .formLogin(login -> login
                         .loginPage("/login")
                         .defaultSuccessUrl("/users")
                         .permitAll());
