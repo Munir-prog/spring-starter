@@ -15,6 +15,7 @@ import lombok.SneakyThrows;
 import org.hibernate.mapping.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -50,6 +51,8 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
 
+//    @PostFilter("filterObject.role.name().equals('ADMIN')")
+    @PostFilter("@companyService.findById(filterObject.company.id()).isPresent()")
     public Page<UserReadDto> findAll(UserFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.firstname(), user.firstname::containsIgnoreCase)

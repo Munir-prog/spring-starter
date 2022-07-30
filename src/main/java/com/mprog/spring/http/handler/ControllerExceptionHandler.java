@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 public class ControllerExceptionHandler /*extends ResponseEntityExceptionHandler*/ {
 
 
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception exception, HttpServletRequest request) {
-        log.error("Failed to return response", exception);
-        return "error/error500";
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String handleException(Exception exception, HttpServletRequest request) {
+//        log.error("Failed to return response", exception);
+//        return "error/error500";
+//    }
 
 }
